@@ -2,10 +2,14 @@ import 'package:get/get.dart';
 
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
+import '../modules/karyawan/bindings/karyawan_binding.dart';
+import '../modules/karyawan/views/karyawan_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/mahasiswa/bindings/mahasiswa_binding.dart';
 import '../modules/mahasiswa/views/mahasiswa_view.dart';
+import '../modules/signup/bindings/signup_binding.dart';
+import '../modules/signup/views/signup_view.dart';
 
 part 'app_routes.dart';
 
@@ -27,8 +31,23 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.MAHASISWA,
-      page: () => MahasiswaView(),
+      page: () => const MahasiswaView(),
       binding: MahasiswaBinding(),
+    ),
+    GetPage(
+      name: _Paths.KARYAWAN,
+      page: () => const KaryawanView(),
+      binding: KaryawanBinding(),
+    ),
+    GetPage(
+      name: _Paths.SIGNUP,
+      page: () => SignupView(),
+      binding: SignupBinding(),
+    ),
+    GetPage(
+      name: _Paths.RESET_PASSWORD,
+      page: () => SignupView(),
+      binding: SignupBinding(),
     ),
   ];
 }

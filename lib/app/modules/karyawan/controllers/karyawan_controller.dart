@@ -2,38 +2,38 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class MahasiswaController extends GetxController {
-  //TODO: Implement MahasiswaController
-  late TextEditingController cNpm;
+class KaryawanController extends GetxController {
+  //TODO: Implement karyawanController
   late TextEditingController cNama;
+  late TextEditingController cJabatan;
 
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   Future<QuerySnapshot<Object?>> GetData() async {
-    CollectionReference mahasiswa = firestore.collection('mahasiswa');
+    CollectionReference karyawan = firestore.collection('karyawan');
 
-    return mahasiswa.get();
+    return karyawan.get();
   }
 
   Stream<QuerySnapshot<Object?>> streamData() {
-    CollectionReference mahasiswa = firestore.collection('mahasiswa');
-    return mahasiswa.snapshots();
+    CollectionReference karyawan = firestore.collection('karyawan');
+    return karyawan.snapshots();
   }
 
-  void add(String npm, String nama) async {
-    CollectionReference mahasiswa = firestore.collection("mahasiswa");
+  void add(String nama, String jabatan) async {
+    CollectionReference karyawan = firestore.collection("karyawan");
 
     try {
-      await mahasiswa.add({
-        "npm": npm,
+      await karyawan.add({
         "nama": nama,
+        "jabatan": jabatan,
       });
       Get.defaultDialog(
           title: "Berhasil",
-          middleText: "Berhasil menyimpan data mahasiswa",
+          middleText: "Berhasil menyimpan data karyawan",
           onConfirm: () {
-            cNpm.clear();
             cNama.clear();
+            cJabatan.clear();
             Get.back();
             Get.back();
             textConfirm:
@@ -43,32 +43,32 @@ class MahasiswaController extends GetxController {
       print(e);
       Get.defaultDialog(
         title: "Terjadi Kesalahan",
-        middleText: "Gagal Menambahkan Mahasiswa.",
+        middleText: "Gagal Menambahkan karyawan.",
       );
     }
   }
 
   Future<DocumentSnapshot<Object?>> GetDataById(String id) async {
-    DocumentReference docRef = firestore.collection("mahasiswa").doc(id);
+    DocumentReference docRef = firestore.collection("karyawan").doc(id);
 
     return docRef.get();
   }
 
-  void Update(String npm, String nama, String id) async {
-    DocumentReference mahasiswaById = firestore.collection("mahasiswa").doc(id);
+  void Update(String nama, String jabatan, String id) async {
+    DocumentReference karyawanById = firestore.collection("karyawan").doc(id);
 
     try {
-      await mahasiswaById.update({
-        "npm": npm,
+      await karyawanById.update({
         "nama": nama,
+        "jabatan": jabatan,
       });
 
       Get.defaultDialog(
         title: "Berhasil",
-        middleText: "Berhasil mengubah data Mahasiswa.",
+        middleText: "Berhasil mengubah data karyawan.",
         onConfirm: () {
-          cNpm.clear();
           cNama.clear();
+          cJabatan.clear();
           Get.back();
           Get.back();
         },
@@ -78,13 +78,13 @@ class MahasiswaController extends GetxController {
       print(e);
       Get.defaultDialog(
         title: "Terjadi Kesalahan",
-        middleText: "Gagal Menambahkan Mahasiswa.",
+        middleText: "Gagal Menambahkan karyawan.",
       );
     }
   }
 
   void delete(String id) {
-    DocumentReference docRef = firestore.collection("mahasiswa").doc(id);
+    DocumentReference docRef = firestore.collection("karyawan").doc(id);
 
     try {
       Get.defaultDialog(
@@ -113,16 +113,16 @@ class MahasiswaController extends GetxController {
   @override
   void onInit() {
     // TODO: implement onInit
-    cNpm = TextEditingController();
     cNama = TextEditingController();
+    cJabatan = TextEditingController();
     super.onInit();
   }
 
   @override
   void onClose() {
     // TODO: implement onClose
-    cNpm.dispose();
     cNama.dispose();
+    cJabatan.dispose();
     super.onClose();
   }
 }

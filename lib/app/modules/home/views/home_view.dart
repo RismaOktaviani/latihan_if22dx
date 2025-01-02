@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:myapp/app/controllers/auth_controller.dart';
+import 'package:myapp/app/modules/karyawan/views/karyawan_add_view.dart';
+import 'package:myapp/app/modules/karyawan/views/karyawan_view.dart';
 import 'package:myapp/app/modules/mahasiswa/views/mahasiswa_add_view.dart';
 
 import '../../mahasiswa/views/mahasiswa_view.dart';
@@ -9,9 +11,11 @@ import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
   final cAuth = Get.lazyPut(() => AuthController());
+
+  HomeView({super.key});
   @override
   Widget build(BuildContext context) {
-    return DashboardAdmin();
+    return const DashboardAdmin();
   }
 }
 
@@ -25,26 +29,26 @@ class DashboardAdmin extends StatefulWidget {
 class _DashboardAdminState extends State<DashboardAdmin> {
   final cAuth = Get.find<AuthController>();
   int _index = 0;
-  List<Map> _fragment = [
+  final List<Map> _fragment = [
     {
       'title': 'Dashboard',
-      'view': MahasiswaView(),
-      'add': () => MahasiswaAddView(),
+      'view': const MahasiswaView(),
+      'add': () => const MahasiswaAddView(),
     },
     {
       'title': 'Data Mahasiswa',
-      'view': MahasiswaView(),
-      'add': () => MahasiswaAddView(),
+      'view': const MahasiswaView(),
+      'add': () => const MahasiswaAddView(),
     },
     {
       'title': 'Data Dosen',
-      'view': MahasiswaView(),
-      'add': () => MahasiswaAddView(),
+      'view': const MahasiswaView(),
+      'add': () => const MahasiswaAddView(),
     },
     {
-      'title': 'Data Pegawai',
-      'view': MahasiswaView(),
-      'add': () => MahasiswaAddView(),
+      'title': 'Data Karyawan',
+      'view': const KaryawanView(),
+      'add': () => const KaryawanAddView(),
     },
   ];
 
@@ -57,17 +61,17 @@ class _DashboardAdminState extends State<DashboardAdmin> {
         titleSpacing: 0,
         title: Text(
           _fragment[_index]['title'],
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.white,
           ),
         ),
         actions: [
           IconButton(
             onPressed: () => Get.to(_fragment[_index]['add']),
-            icon: Icon(Icons.add_circle_outline),
+            icon: const Icon(Icons.add_circle_outline),
           )
         ],
-        iconTheme: IconThemeData(
+        iconTheme: const IconThemeData(
           color: Colors.white,
         ),
       ),
@@ -79,7 +83,7 @@ class _DashboardAdminState extends State<DashboardAdmin> {
     return Drawer(
       child: ListView(
         children: [
-          DrawerHeader(
+          const DrawerHeader(
             decoration: BoxDecoration(
               color: Colors.red,
             ),
@@ -93,7 +97,7 @@ class _DashboardAdminState extends State<DashboardAdmin> {
                   color: Colors.white,
                 ),
                 Text(
-                  "Reflan Nuari",
+                  "Risma Oktaviani",
                   style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -117,9 +121,9 @@ class _DashboardAdminState extends State<DashboardAdmin> {
               setState(() => _index = 0);
               Get.back();
             },
-            leading: Icon(Icons.dashboard),
-            title: Text('Dashboard'),
-            trailing: Icon(Icons.navigate_next),
+            leading: const Icon(Icons.dashboard),
+            title: const Text('Dashboard'),
+            trailing: const Icon(Icons.navigate_next),
             iconColor: Colors.red,
             textColor: Colors.red,
           ),
@@ -128,9 +132,9 @@ class _DashboardAdminState extends State<DashboardAdmin> {
               setState(() => _index = 1);
               Get.back();
             },
-            leading: Icon(Icons.people),
-            title: Text('Data Mahasiswa'),
-            trailing: Icon(Icons.navigate_next),
+            leading: const Icon(Icons.people),
+            title: const Text('Data Mahasiswa'),
+            trailing: const Icon(Icons.navigate_next),
             iconColor: Colors.red,
             textColor: Colors.red,
           ),
@@ -139,9 +143,9 @@ class _DashboardAdminState extends State<DashboardAdmin> {
               setState(() => _index = 2);
               Get.back();
             },
-            leading: Icon(Icons.people),
-            title: Text('Data Dosen'),
-            trailing: Icon(Icons.navigate_next),
+            leading: const Icon(Icons.people),
+            title: const Text('Data Dosen'),
+            trailing: const Icon(Icons.navigate_next),
             iconColor: Colors.red,
             textColor: Colors.red,
           ),
@@ -150,9 +154,9 @@ class _DashboardAdminState extends State<DashboardAdmin> {
               setState(() => _index = 3);
               Get.back();
             },
-            leading: Icon(Icons.people),
-            title: Text('Data Pegawai'),
-            trailing: Icon(Icons.navigate_next),
+            leading: const Icon(Icons.people),
+            title: const Text('Data Karyawan'),
+            trailing: const Icon(Icons.navigate_next),
             iconColor: Colors.red,
             textColor: Colors.red,
           ),
@@ -161,9 +165,9 @@ class _DashboardAdminState extends State<DashboardAdmin> {
               Get.back();
               cAuth.logout();
             },
-            leading: Icon(Icons.logout),
-            title: Text('Logout'),
-            trailing: Icon(Icons.navigate_next),
+            leading: const Icon(Icons.logout),
+            title: const Text('Logout'),
+            trailing: const Icon(Icons.navigate_next),
             iconColor: Colors.red,
             textColor: Colors.red,
           ),

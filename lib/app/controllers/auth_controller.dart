@@ -9,27 +9,60 @@ class AuthController extends GetxController {
 
   Stream<User?> get streamAuthStatus => auth.authStateChanges();
 
-  void signup() {}
-  void login(String email, String password) async {
+  void signup(String emailAddress, String password) async {
     try {
-      final credential = await auth.signInWithEmailAndPassword(
-        email: email,
+      UserCredential myUser = await auth.createUserWithEmailAndPassword(
+        email: emailAddress,
         password: password,
       );
-      Get.offAllNamed(Routes.HOME);
+      await myUser.user!.sendEmailVerification();
+      Get.defaultDialog(
+          title: "Verifikasi email",
+          middleText:
+              "Kami telah mengirimkan verfikasi ke email $emailAddress.",
+          onConfirm: () {
+            Get.back(); //close dialog
+            Get.back(); //login
+          },
+          textConfirm: "OK");
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        print('The password provided is too weak.');
+      } else if (e.code == 'email-already-in-use') {
+        print('The account already exists for that email.');
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  void login(String emailAddress, String password) async {
+    try {
+      UserCredential myUser = await auth.signInWithEmailAndPassword(
+        email: emailAddress,
+        password: password,
+      );
+      if (myUser.user!.emailVerified) {
+        //untuk routing
+        Get.offAllNamed(Routes.HOME);
+      } else {
+        Get.defaultDialog(
+          title: "Verifikasi email",
+          middleText: "Harap verifikasi email terlebih dahulu",
+        );
+      }
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
+        Get.defaultDialog(
+            title: "Terjadi kesalahan",
+            middleText: "No user found for that email.");
         print('No user found for that email.');
-        Get.defaultDialog(
-          title: "Proses Gagal",
-          middleText: "No user found for that email.",
-        );
       } else if (e.code == 'wrong-password') {
-        print('Wrong password provided for that user.');
         Get.defaultDialog(
-          title: "Proses Gagal",
-          middleText: "Wrong password provided for that user.",
-        );
+            title: "Terjadi kesalahan",
+            middleText: "Wrong password provided for that user.");
+
+        print('Wrong password provided for that user.');
       }
     }
   }

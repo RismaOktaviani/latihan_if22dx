@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
-import '../controllers/mahasiswa_controller.dart';
-import 'mahasiswa_update_view.dart';
+import '../controllers/karyawan_controller.dart';
+import 'karyawan_update_view.dart';
 
-class MahasiswaView extends GetView<MahasiswaController> {
-  const MahasiswaView({super.key});
+class KaryawanView extends GetView<KaryawanController> {
+  const KaryawanView({super.key});
 
   void showOption(id) async {
     var result = await Get.dialog(
@@ -17,7 +17,7 @@ class MahasiswaView extends GetView<MahasiswaController> {
             onTap: () {
               Get.back();
               Get.to(
-                const MahasiswaUpdateView(),
+                const KaryawanUpdateView(),
                 arguments: id,
               );
             },
@@ -43,7 +43,7 @@ class MahasiswaView extends GetView<MahasiswaController> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot<Object?>>(
-      stream: Get.put(MahasiswaController()).streamData(),
+      stream: Get.put(KaryawanController()).streamData(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.active) {
           // mengambil data
@@ -59,7 +59,7 @@ class MahasiswaView extends GetView<MahasiswaController> {
                     title: Text(
                         "${(listAllDocs[index].data() as Map<String, dynamic>)["nama"]}"),
                     subtitle: Text(
-                        "${(listAllDocs[index].data() as Map<String, dynamic>)["npm"]}"),
+                        "${(listAllDocs[index].data() as Map<String, dynamic>)["jabatan"]}"),
                     trailing: IconButton(
                         onPressed: () => showOption(listAllDocs[index].id),
                         icon: const Icon(Icons.more_vert)),

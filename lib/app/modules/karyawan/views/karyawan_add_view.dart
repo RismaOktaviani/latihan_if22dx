@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:myapp/app/modules/mahasiswa/controllers/mahasiswa_controller.dart';
+import 'package:myapp/app/modules/karyawan/controllers/karyawan_controller.dart';
 
-class MahasiswaAddView extends GetView<MahasiswaController> {
-  const MahasiswaAddView({super.key});
+class KaryawanAddView extends GetView<KaryawanController> {
+  const KaryawanAddView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Tambah Mahasiswa'),
+        title: const Text('Tambah karyawan'),
         centerTitle: true,
       ),
       body: Padding(
@@ -17,26 +17,26 @@ class MahasiswaAddView extends GetView<MahasiswaController> {
         child: Column(
           children: [
             TextField(
-              controller: controller.cNpm,
+              controller: controller.cNama,
               autocorrect: false,
               textInputAction: TextInputAction.next,
-              decoration: const InputDecoration(labelText: "NPM"),
+              decoration: const InputDecoration(labelText: "Nama"),
             ),
             const SizedBox(
               height: 10,
             ),
             TextField(
-              controller: controller.cNama,
+              controller: controller.cJabatan,
               textInputAction: TextInputAction.done,
-              decoration: const InputDecoration(labelText: "Nama"),
+              decoration: const InputDecoration(labelText: "Jabatan"),
             ),
             const SizedBox(
               height: 30,
             ),
             ElevatedButton(
               onPressed: () => controller.add(
-                controller.cNpm.text,
                 controller.cNama.text,
+                controller.cJabatan.text,
               ),
               child: const Text("Simpan"),
             )
