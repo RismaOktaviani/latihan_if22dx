@@ -2,8 +2,8 @@ import 'package:get/get.dart';
 
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
-import '../modules/karyawan/bindings/karyawan_binding.dart';
-import '../modules/karyawan/views/karyawan_view.dart';
+import '../modules/matakuliah/bindings/matakuliah_binding.dart';
+import '../modules/matakuliah/views/matakuliah_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/mahasiswa/bindings/mahasiswa_binding.dart';
@@ -35,9 +35,9 @@ class AppPages {
       binding: MahasiswaBinding(),
     ),
     GetPage(
-      name: _Paths.KARYAWAN,
-      page: () => const KaryawanView(),
-      binding: KaryawanBinding(),
+      name: _Paths.MATAKULIAH,
+      page: () => const MatakuliahView(),
+      binding: MatakuliahBinding(),
     ),
     GetPage(
       name: _Paths.SIGNUP,

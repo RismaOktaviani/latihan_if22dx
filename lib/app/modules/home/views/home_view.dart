@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:myapp/app/controllers/auth_controller.dart';
-import 'package:myapp/app/modules/karyawan/views/karyawan_add_view.dart';
-import 'package:myapp/app/modules/karyawan/views/karyawan_view.dart';
+import 'package:myapp/app/modules/matakuliah/views/matakuliah_add_view.dart';
+import 'package:myapp/app/modules/matakuliah/views/matakuliah_view.dart';
 import 'package:myapp/app/modules/mahasiswa/views/mahasiswa_add_view.dart';
 
 import '../../mahasiswa/views/mahasiswa_view.dart';
@@ -46,9 +46,9 @@ class _DashboardAdminState extends State<DashboardAdmin> {
       'add': () => const MahasiswaAddView(),
     },
     {
-      'title': 'Data Karyawan',
-      'view': const KaryawanView(),
-      'add': () => const KaryawanAddView(),
+      'title': 'Data Matakuliah',
+      'view': const MatakuliahView(),
+      'add': () => const MatakuliahAddView(),
     },
   ];
 
@@ -155,7 +155,7 @@ class _DashboardAdminState extends State<DashboardAdmin> {
               Get.back();
             },
             leading: const Icon(Icons.people),
-            title: const Text('Data Karyawan'),
+            title: const Text('Pemrograman Mobile_22312071'),
             trailing: const Icon(Icons.navigate_next),
             iconColor: Colors.red,
             textColor: Colors.red,

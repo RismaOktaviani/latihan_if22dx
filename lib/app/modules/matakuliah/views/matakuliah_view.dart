@@ -3,13 +3,14 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
-import '../controllers/karyawan_controller.dart';
-import 'karyawan_update_view.dart';
+import '../controllers/matakuliah_controller.dart';
+import 'matakuliah_update_view.dart';
 
-class KaryawanView extends GetView<KaryawanController> {
-  const KaryawanView({super.key});
+class MatakuliahView extends GetView<MatakuliahController> {
+  const MatakuliahView({super.key});
 
   void showOption(id) async {
+    // ignore: unused_local_variable
     var result = await Get.dialog(
       SimpleDialog(
         children: [
@@ -17,7 +18,7 @@ class KaryawanView extends GetView<KaryawanController> {
             onTap: () {
               Get.back();
               Get.to(
-                const KaryawanUpdateView(),
+                const MatakuliahUpdateView(),
                 arguments: id,
               );
             },
@@ -43,7 +44,7 @@ class KaryawanView extends GetView<KaryawanController> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot<Object?>>(
-      stream: Get.put(KaryawanController()).streamData(),
+      stream: Get.put(MatakuliahController()).streamData(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.active) {
           // mengambil data
@@ -56,10 +57,10 @@ class KaryawanView extends GetView<KaryawanController> {
                       backgroundColor: const Color.fromARGB(255, 248, 248, 248),
                       child: Text('${index + 1}'),
                     ),
-                    title: Text(
-                        "${(listAllDocs[index].data() as Map<String, dynamic>)["nama"]}"),
+                     title: Text(
+                        "${(listAllDocs[index].data() as Map<String, dynamic>)["kode_matakuliah"]}"),
                     subtitle: Text(
-                        "${(listAllDocs[index].data() as Map<String, dynamic>)["jabatan"]}"),
+                        "${(listAllDocs[index].data() as Map<String, dynamic>)["nama_matakuliah"]}"),
                     trailing: IconButton(
                         onPressed: () => showOption(listAllDocs[index].id),
                         icon: const Icon(Icons.more_vert)),
